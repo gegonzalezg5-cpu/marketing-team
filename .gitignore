@@ -1,0 +1,4 @@
+node_modules/
+google-credentials.json
+google-mcp-server.exe
+google-mcp-config.json
