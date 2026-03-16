@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "store": "Four Store",
+    "url": "fourstore.cl",
+    "generated_at": "2026-03-15T15:32:52.477Z",
+    "currency": "CLP"
+  },
+  "weeks": [
+    {
+      "id": "this_week",
+      "label": "09-mar – 15-mar",
+      "since": "2026-03-09",
+      "until": "2026-03-16",
+      "summary": {
+        "sessions": 6098,
+        "orders": 60,
+        "revenue": 1925714,
+        "aov": 32095,
+        "convRate": 0.95
+      },
+      "daily": [
+        {
+          "day": "2026-03-09",
+          "label": "lun, 09 mar",
+          "sessions": 1185,
+          "orders": 7,
+          "revenue": 251063,
+          "convRate": 0.00590717299578059
+        },
+        {
+          "day": "2026-03-10",
+          "label": "mar, 10 mar",
+          "sessions": 1023,
+          "orders": 12,
+          "revenue": 376495,
+          "convRate": 0.010752688172043012
+        },
+        {
+          "day": "2026-03-11",
+          "label": "mié, 11 mar",
+          "sessions": 874,
+          "orders": 7,
+          "revenue": 230471,
+          "convRate": 0.008009153318077803
+        },
+        {
+          "day": "2026-03-12",
+          "label": "jue, 12 mar",
+          "sessions": 839,
+          "orders": 9,
+          "revenue": 340057,
+          "convRate": 0.010727056019070322
+        },
+        {
+          "day": "2026-03-13",
+          "label": "vie, 13 mar",
+          "sessions": 735,
+          "orders": 8,
+          "revenue": 232501,
+          "convRate": 0.010884353741496598
+        },
+        {
+          "day": "2026-03-14",
+          "label": "sáb, 14 mar",
+          "sessions": 1054,
+          "orders": 11,
+          "revenue": 322776,
+          "convRate": 0.009487666034155597
+        },
+        {
+          "day": "2026-03-15",
+          "label": "dom, 15 mar",
+          "sessions": 388,
+          "orders": 6,
+          "revenue": 172351,
+          "convRate": 0.015463917525773196
+        },
+        {
+          "day": "2026-03-16",
+          "label": "lun, 16 mar",
+          "sessions": 0,
+          "orders": 0,
+          "revenue": 0,
+          "convRate": 0
+        }
+      ],
+      "vs_prev": {
+        "sessions": -9.2,
+        "orders": -10.4,
+        "revenue": -25,
+        "aov": -16.2,
+        "convRate": -3.1
+      }
+    },
+    {
+      "id": "last_week",
+      "label": "02-mar – 08-mar",
+      "since": "2026-03-02",
+      "until": "2026-03-09",
+      "summary": {
+        "sessions": 6717,
+        "orders": 67,
+        "revenue": 2566037,
+        "aov": 38299,
+        "convRate": 0.98
+      },
+      "daily": [
+        {
+          "day": "2026-03-02",
+          "label": "lun, 02 mar",
+          "sessions": 763,
+          "orders": 8,
+          "revenue": 256952,
+          "convRate": 0.010484927916120577
+        },
+        {
+          "day": "2026-03-03",
+          "label": "mar, 03 mar",
+          "sessions": 849,
+          "orders": 12,
+          "revenue": 810082,
+          "convRate": 0.012956419316843345
+        },
+        {
+          "day": "2026-03-04",
+          "label": "mié, 04 mar",
+          "sessions": 913,
+          "orders": 9,
+          "revenue": 270295,
+          "convRate": 0.009857612267250822
+        },
+        {
+          "day": "2026-03-05",
+          "label": "jue, 05 mar",
+          "sessions": 851,
+          "orders": 7,
+          "revenue": 181610,
+          "convRate": 0.008225616921269096
+        },
+        {
+          "day": "2026-03-06",
+          "label": "vie, 06 mar",
+          "sessions": 800,
+          "orders": 5,
+          "revenue": 112793,
+          "convRate": 0.00625
+        },
+        {
+          "day": "2026-03-07",
+          "label": "sáb, 07 mar",
+          "sessions": 688,
+          "orders": 7,
+          "revenue": 244549,
+          "convRate": 0.010174418604651164
+        },
+        {
+          "day": "2026-03-08",
+          "label": "dom, 08 mar",
+          "sessions": 668,
+          "orders": 12,
+          "revenue": 438693,
+          "convRate": 0.017964071856287425
+        },
+        {
+          "day": "2026-03-09",
+          "label": "lun, 09 mar",
+          "sessions": 1185,
+          "orders": 7,
+          "revenue": 251063,
+          "convRate": 0.00590717299578059
+        }
+      ],
+      "vs_prev": null
+    }
+  ]
+}

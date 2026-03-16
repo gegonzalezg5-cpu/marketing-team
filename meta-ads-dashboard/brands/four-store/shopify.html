@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify Report — Four Store</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/css/base.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    /* ── Platform switcher ─────────────────────────────────────── */
+    .platform-nav {
+      position: fixed;
+      top: 60px;
+      left: 0; right: 0;
+      z-index: 90;
+      display: flex;
+      justify-content: center;
+      gap: var(--s2);
+      padding: var(--s2) var(--s4);
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .platform-nav__btn {
+      display: flex;
+      align-items: center;
+      gap: var(--s2);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .platform-nav__btn:hover {
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .platform-nav__btn.active {
+      background: rgba(255,255,255,0.07);
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .platform-nav__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .platform-nav__dot--meta { background: #1877f2; }
+    .platform-nav__dot--shopify { background: #96bf48; }
+
+    /* ── Push content below both navs ──────────────────────────── */
+    body { padding-top: 116px; }
+    .section--hero { padding-top: 60px !important; }
+
+    /* ── KPI hero with delta badges ────────────────────────────── */
+    .kpi-hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s4);
+      margin-top: var(--s6);
+    }
+    @media (max-width: 900px) {
+      .kpi-hero-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .kpi-hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--s5) var(--s5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s2);
+    }
+    .kpi-hero-card__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .kpi-hero-card__value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+    .kpi-hero-card__delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+    .kpi-hero-card__delta.up { background: rgba(52,199,89,0.12); color: #34c759; }
+    .kpi-hero-card__delta.down { background: rgba(255,59,48,0.12); color: #ff3b30; }
+    .kpi-hero-card__delta.neutral { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+    .kpi-hero-card__vs { font-size: 11px; color: var(--text-muted); }
+
+    /* ── Week selector (reutilizado) ────────────────────────────── */
+    .week-tabs { display: flex; gap: var(--s2); margin-bottom: var(--s6); flex-wrap: wrap; }
+    .week-tab {
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .week-tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ── Daily chart container ──────────────────────────────────── */
+    .shopify-chart-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--s5);
+      margin-bottom: var(--s6);
+    }
+    .shopify-chart-wrap__title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--s4);
+    }
+
+    /* ── Daily table ────────────────────────────────────────────── */
+    .daily-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .daily-table th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      padding: var(--s2) var(--s3);
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+    }
+    .daily-table th:first-child { text-align: left; }
+    .daily-table td {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: var(--s3) var(--s3);
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .daily-table td:first-child {
+      text-align: left;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .daily-table tr:last-child td { border-bottom: none; }
+    .daily-table .highlight { color: var(--secondary); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- ── Main nav ──────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav__logo">Four Store</div>
+    <div class="nav__links">
+      <a href="#hero">Resumen</a>
+      <a href="#weekly">Por Semana</a>
+    </div>
+    <div class="nav__badge" id="generated-at"></div>
+  </nav>
+
+  <!-- ── Platform switcher ─────────────────────────────────────── -->
+  <div class="platform-nav">
+    <a href="index.html" class="platform-nav__btn">
+      <span class="platform-nav__dot platform-nav__dot--meta"></span>
+      Paid Media
+    </a>
+    <a href="shopify.html" class="platform-nav__btn active">
+      <span class="platform-nav__dot platform-nav__dot--shopify"></span>
+      Shopify
+    </a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       S1 — HERO
+  ═══════════════════════════════════════════════════════ -->
+  <section id="hero" class="section section--hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grid"></div>
+    <div class="hero__content container">
+      <span class="hero__eyebrow">Shopify · Four Store</span>
+      <h1 class="hero__title">Ventas<br><span class="text-gradient">Semanales</span></h1>
+      <p class="hero__subtitle" id="hero-subtitle">Cargando datos...</p>
+      <div class="kpi-hero-grid" id="kpi-hero-grid"></div>
+    </div>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-hint__arrow"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       S2 — DESGLOSE SEMANAL
+  ═══════════════════════════════════════════════════════ -->
+  <section id="weekly" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__eyebrow">Sección 01</span>
+        <h2 class="section__title">Resultados<br><span class="text-gradient">por Semana</span></h2>
+        <p class="section__desc">Sesiones · Pedidos · Ventas · Tasa de Conversión · desglose diario</p>
+      </div>
+
+      <div class="week-tabs" id="week-tabs"></div>
+
+      <!-- Chart -->
+      <div class="shopify-chart-wrap">
+        <div class="shopify-chart-wrap__title" id="chart-title">Sesiones y pedidos diarios</div>
+        <canvas id="dailyChart" height="80"></canvas>
+      </div>
+
+      <!-- Daily table -->
+      <div id="daily-table-wrap"></div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="../../shared/js/core.js"></script>
+  <script src="js/shopify.js"></script>
+</body>
+</html>

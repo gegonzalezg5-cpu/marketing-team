@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Ads Report — Four Store</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/css/base.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    body { padding-top: 56px; }
+    .section--hero { padding-top: 60px !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Progress bar ─────────────────────────────────────── -->
+  <div id="progress-bar"></div>
+
+  <!-- ── Lightbox ──────────────────────────────────────────── -->
+  <div id="lightbox" class="lightbox">
+    <div id="lightbox-content" class="lightbox__box"></div>
+  </div>
+
+  <!-- ── Navigation ───────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav__logo">Four Store</div>
+    <div class="nav__links">
+      <a href="#monthly">Mes</a>
+      <a href="#weekly">Semana</a>
+      <a href="#showcase">Creativos</a>
+      <a href="#takeaways">Insights</a>
+      <a href="#recommendations">Recomendaciones</a>
+    </div>
+    <div class="nav__badge" id="generated-at"></div>
+  </nav>
+
+  <!-- ── Platform switcher ─────────────────────────────────── -->
+  <div class="platform-nav">
+    <a href="index.html" class="platform-nav__btn active">
+      <span class="platform-nav__dot platform-nav__dot--meta"></span>
+      Paid Media
+    </a>
+    <a href="shopify.html" class="platform-nav__btn">
+      <span class="platform-nav__dot platform-nav__dot--shopify"></span>
+      Shopify
+    </a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       S1 — HERO
+  ═══════════════════════════════════════════════════════ -->
+  <section id="hero" class="section section--hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grid"></div>
+    <div class="hero__content container">
+      <span class="hero__eyebrow">Meta Ads · Four Store</span>
+      <h1 class="hero__title">Reporte<br><span class="text-gradient">Semanal</span></h1>
+      <p class="hero__subtitle" id="hero-subtitle">Cargando datos...</p>
+      <div class="hero__kpis" id="hero-kpis"></div>
+    </div>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-hint__arrow"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       S2 — RESULTADOS MENSUALES
+  ═══════════════════════════════════════════════════════ -->
+  <section id="monthly" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__eyebrow">Sección 01</span>
+        <h2 class="section__title">Resultados<br><span class="text-gradient">del Mes</span></h2>
+        <p class="section__desc" id="monthly-label-desc">Acumulado mensual · todas las campañas activas</p>
+      </div>
+
+      <!-- Monthly KPIs -->
+      <div id="monthly-summary"></div>
+
+      <!-- Bar chart: gasto por campaña -->
+      <div class="chart-container" style="margin-bottom:var(--s8)">
+        <div class="chart-title">Gasto por campaña — acumulado mensual</div>
+        <canvas id="campaignChart" height="90"></canvas>
+      </div>
+
+      <!-- Monthly campaigns (sin expand de ads) -->
+      <div class="campaigns-list" id="monthly-campaigns">
+        <div class="empty-state">Cargando...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       S3 — RESULTADOS POR PERÍODO
+  ═══════════════════════════════════════════════════════ -->
+  <section id="weekly" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__eyebrow">Sección 02</span>
+        <h2 class="section__title">Resultados<br><span class="text-gradient">por Período</span></h2>
+        <p class="section__desc">Campañas con actividad · nivel campaña + anuncio · click para ver detalle</p>
+      </div>
+
+      <!-- Period selector tabs -->
+      <div class="week-selector" id="week-selector"></div>
+
+      <!-- Campaign cards (updated on tab switch) -->
+      <div class="campaigns-list" id="weekly-campaigns">
+        <div class="empty-state">Cargando campañas...</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       S4 — CREATIVOS ESTRELLA
+  ═══════════════════════════════════════════════════════ -->
+  <section id="showcase" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__eyebrow">Sección 03</span>
+        <h2 class="section__title">Creativos<br><span class="text-gradient">Estrella</span></h2>
+        <p class="section__desc">Los 4 anuncios con mejor rendimiento · click para ver en detalle</p>
+      </div>
+      <div class="showcase-grid" id="showcase-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       S5 — INSIGHTS
+  ═══════════════════════════════════════════════════════ -->
+  <section id="takeaways" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__eyebrow">Sección 04</span>
+        <h2 class="section__title">Insights del<br><span class="text-gradient">Último Mes</span></h2>
+        <p class="section__desc">Lo más importante · qué está funcionando y qué no</p>
+      </div>
+      <div class="insights-layout" id="insights-layout"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       S6 — RECOMENDACIONES GENARO
+  ═══════════════════════════════════════════════════════ -->
+  <section id="recommendations" class="section section--compact">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__eyebrow">Sección 05</span>
+        <h2 class="section__title">Recomendaciones<br><span class="text-gradient">Genaro</span></h2>
+        <p class="section__desc">Acciones concretas para la próxima semana</p>
+      </div>
+      <div id="recommendations-list" class="recommendations-list"></div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <span>Four Store · Meta Ads Dashboard</span>
+      <span id="footer-date"></span>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────────────────── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="../../shared/js/core.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

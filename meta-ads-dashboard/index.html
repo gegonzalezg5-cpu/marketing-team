@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Reports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/css/base.css">
+  <style>
+    .landing { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: var(--s20) 0; }
+    .landing__title { font-size: clamp(32px, 6vw, 64px); font-weight: 900; letter-spacing: -0.04em; margin-bottom: var(--s3); }
+    .landing__sub { font-size: 16px; color: var(--text-dim); margin-bottom: var(--s12); }
+    .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s5); }
+    .brand-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s8);
+      transition: all 0.22s ease;
+      display: block;
+    }
+    .brand-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(24,119,242,0.1); }
+    .brand-card__logo { font-size: 32px; margin-bottom: var(--s4); }
+    .brand-card__name { font-size: 20px; font-weight: 800; margin-bottom: var(--s2); }
+    .brand-card__desc { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+    .brand-card__tag { display: inline-block; margin-top: var(--s4); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); background: var(--primary-dim); border: 1px solid var(--primary); border-radius: var(--r-sm); padding: 2px 8px; }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+  <div class="landing container">
+    <div class="landing__title">Marketing<br><span class="text-gradient">Reports</span></div>
+    <p class="landing__sub">Reportes semanales de performance · Genaro González</p>
+    <div class="brands-grid">
+      <a href="brands/four-store/" class="brand-card">
+        <div class="brand-card__logo">⚽</div>
+        <div class="brand-card__name">Four Store</div>
+        <div class="brand-card__desc">Meta Ads · Uniformes deportivos · Reporte semanal de campañas, creativos y recomendaciones.</div>
+        <span class="brand-card__tag">Meta Ads</span>
+      </a>
+      <!-- Agregar más marcas aquí -->
+    </div>
+  </div>
+  <script src="shared/js/core.js"></script>
+  <script>
+    // Simple GSAP entrance for landing
+    window.addEventListener('load', () => {
+      if (typeof gsap === 'undefined') return;
+      gsap.from('.landing__title', { opacity: 0, y: 30, duration: 0.7, ease: 'power3.out' });
+      gsap.from('.brand-card', { opacity: 0, y: 20, stagger: 0.1, duration: 0.5, delay: 0.3, ease: 'power2.out' });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</body>
+</html>

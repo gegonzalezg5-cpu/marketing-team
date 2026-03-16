@@ -1,0 +1,14 @@
+{
+  "name": "meta-ads-manager",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Ad Manager CLI para Meta Marketing API",
+  "scripts": {
+    "cli": "node src/cli.js",
+    "countries": "node src/analyze-countries.js",
+    "ads": "node src/analyze-ads.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
